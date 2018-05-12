@@ -47,7 +47,7 @@ If you wanna use this, There's two options you use this.
 ### B. use as a local plugin
 
 Add   
-    `gem "fastlane-plugin-[plugin_name]", git: "https://github.com/[user]/[plugin_name]"`  
+    `gem "fastlane-plugin-disable_push_notifications", git: "https://github.com/tgz/fastlane-plugin-disable_push_notifications"`  
 to your Pluginfile
 
 you should use **bundle exec fastlane any_command** because of [this](https://docs.fastlane.tools/plugins/plugins-troubleshooting/#use-bundle-exec)
