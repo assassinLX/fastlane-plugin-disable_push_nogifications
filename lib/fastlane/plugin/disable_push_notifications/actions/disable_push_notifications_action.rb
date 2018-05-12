@@ -4,8 +4,8 @@ module Fastlane
       def self.run(params)
         require 'xcodeproj'
 
-        		project_path = params[:xcodeproj]
-				project = Xcodeproj::Project.open(project_path)
+        project_path = params[:xcodeproj]
+        project = Xcodeproj::Project.open(project_path)
 
         specificed_target = params[:target]
 
