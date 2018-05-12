@@ -9,21 +9,25 @@ module Fastlane
 
         specificed_target = params[:target]
 
-				target = proc.targets[specificed_target] || project.targets.first
+				target = project.targets.select{|target| target.name == specificed_target}.first || project.targets.first
 
 				attributes = project.root_object.attributes['TargetAttributes']
 				target_attributes = attributes[target.uuid]
-				system_capabilities = target_attributes['SystemCapabilities']
-				#system_capabilities['com.apple.Push']['enabled']='0'
-				system_capabilities.delete('com.apple.Push')
+        system_capabilities = target_attributes['SystemCapabilities']
+        
+        if system_capabilities.class == Hash
+				  #system_capabilities['com.apple.Push']['enabled']='0'
+          system_capabilities.delete('com.apple.Push')
+        end
 
-				target.build_configurations.each do |item|
+        target.build_configurations.each do |item|
+            # just remove the entitlements config from code sign
 				    item.build_settings['CODE_SIGN_ENTITLEMENTS'] = ""
 				end
 
         project.save()
         
-        UI.success("Successfully updated project settings in '#{params[:xcodeproj]}'")
+        UI.success("Push notifications in '#{target.name}' disabled successfully !")
       end
 
       def self.description
