@@ -1,39 +1,58 @@
 # disable_push_notifications plugin
 
-[![fastlane Plugin Badge](https://rawcdn.githack.com/fastlane/fastlane/master/fastlane/assets/plugin-badge.svg)](https://rubygems.org/gems/fastlane-plugin-disable_push_notifications)
-
-## Getting Started
-
-This project is a [_fastlane_](https://github.com/fastlane/fastlane) plugin. To get started with `fastlane-plugin-disable_push_notifications`, add it to your project by running:
-
-```bash
-fastlane add_plugin disable_push_notifications
-```
-
 ## About disable_push_notifications
 
-disable push notifications in capabilities tab
+When we build a enterprise release of our app. We use a `Wildcard App ID`, so we need disable the push notifications. This plugig can do that.
 
-**Note to author:** Add a more detailed description about this plugin here. If your plugin contains multiple actions, make sure to mention them here.
+## Usage
 
-## Example
-
-Check out the [example `Fastfile`](fastlane/Fastfile) to see how to use this plugin. Try it by cloning the repo, running `fastlane install_plugins` and `bundle exec fastlane test`.
-
-**Note to author:** Please set up a sample project to make it easy for users to explore what your plugin does. Provide everything that is necessary to try out the plugin in this project (including a sample Xcode/Android project if necessary)
-
-## Run tests for this plugin
-
-To run both the tests, and code style validation, run
-
-```
-rake
+```ruby
+lane :test do
+    # just apply to the first *.xcodrproj file and the first target in this proj
+    disable_push_notifications
+end
 ```
 
-To automatically fix many of the styling issues, use
+specific project or target
+```ruby
+disable_push_notifications(xcodeproj: your.xcodeproj, target: enterprise)
 ```
-rubocop -a
-```
+
+# Caution  
+
+ This plug just remove the entitlements config, becareful of this.  
+
+ You can also add a function to modify entitlements file. I'm very glad to see a PR.
+
+# Note
+
+I will not publish this plugin to [rubygems.org](https://rubygems.org/).  
+because this is a very rare requirement.
+
+
+If you wanna use this, There's two options you use this.
+
+---
+### A. 👍use as a local action [fastlane doc](https://docs.fastlane.tools/plugins/create-plugin/#local-actions)
+
+1. just get the [disable_push_notifications_action.rb](https://github.com/tgz/fastlane-plugin-disable_push_nogifications/blob/master/lib/fastlane/plugin/disable_push_notifications/actions/disable_push_notifications_action.rb) file.  
+2. Put this file in your `Project/fastlane/Actions` folder  
+3. Rename set the filename to `disable_push_notifications.rb` 
+
+    eg.  
+    *`project_path/fastlane/actions/disable_push_notifications.rb`*
+4. use `disable_push_notifications` command in your `Fastfile`
+
+---
+### B. use as a local plugin
+
+Add   
+    `gem "fastlane-plugin-[plugin_name]", git: "https://github.com/[user]/[plugin_name]"`  
+to your Pluginfile
+
+you should use **bundle exec fastlane any_command** because of [this](https://docs.fastlane.tools/plugins/plugins-troubleshooting/#use-bundle-exec)
+
+---
 
 ## Issues and Feedback
 
