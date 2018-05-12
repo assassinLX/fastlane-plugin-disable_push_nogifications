@@ -6,23 +6,21 @@ module Fastlane
 
         project_path = params[:xcodeproj]
         project = Xcodeproj::Project.open(project_path)
-
         specificed_target = params[:target]
-
-				target = project.targets.select{|target| target.name == specificed_target}.first || project.targets.first
-
-				attributes = project.root_object.attributes['TargetAttributes']
-				target_attributes = attributes[target.uuid]
+        target = project.targets.select{|target| target.name == specificed_target}.first || project.targets.first
+        
+        attributes = project.root_object.attributes['TargetAttributes']
+        target_attributes = attributes[target.uuid]
         system_capabilities = target_attributes['SystemCapabilities']
         
         if system_capabilities.class == Hash
-				  #system_capabilities['com.apple.Push']['enabled']='0'
+          #system_capabilities['com.apple.Push']['enabled']='0'
           system_capabilities.delete('com.apple.Push')
         end
 
         target.build_configurations.each do |item|
             # just remove the entitlements config from code sign
-				    item.build_settings['CODE_SIGN_ENTITLEMENTS'] = ""
+            item.build_settings['CODE_SIGN_ENTITLEMENTS'] = ""
 				end
 
         project.save()
