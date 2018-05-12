@@ -34,14 +34,15 @@ If you wanna use this, There's two options you use this.
 
 ---
 ### A. 👍use as a local action [fastlane doc](https://docs.fastlane.tools/plugins/create-plugin/#local-actions)
-
-1. just get the [disable_push_notifications_action.rb](https://github.com/tgz/fastlane-plugin-disable_push_nogifications/blob/master/lib/fastlane/plugin/disable_push_notifications/actions/disable_push_notifications_action.rb) file.  
-2. Put this file in your `Project/fastlane/Actions` folder  
-3. Rename set the filename to `disable_push_notifications.rb` 
+ 
+1. Create a ruby file: `disable_push_notifications.rb` in your `Project/fastlane/actions` folder
 
     eg.  
     *`project_path/fastlane/actions/disable_push_notifications.rb`*
-4. use `disable_push_notifications` command in your `Fastfile`
+
+2. the file content is [disable_push_notifications_action.rb](https://github.com/tgz/fastlane-plugin-disable_push_nogifications/blob/master/lib/fastlane/plugin/disable_push_notifications/actions/disable_push_notifications_action.rb) file. 
+
+3. use `disable_push_notifications` command in your `Fastfile`
 
 ---
 ### B. use as a local plugin
