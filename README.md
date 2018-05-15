@@ -51,7 +51,7 @@ Add
     `gem "fastlane-plugin-disable_push_notifications", git: "https://github.com/tgz/fastlane-plugin-disable_push_notifications"`  
 to your Pluginfile
 
-you should use **bundle exec fastlane any_command** because of [this](https://docs.fastlane.tools/plugins/plugins-troubleshooting/#use-bundle-exec)
+you should use **bundle exec fastlane any_command** 
 
 ---
 
